@@ -11,8 +11,10 @@ function start(cells) {
         cell.addEventListener('click', function step() {
             if (i % 2 == 0) {
                 this.textContent = 'X';
+                this.style.color = "orange"
             } else {
                 this.textContent = '0';
+                this.style.color = "yellow"
             }
 
             this.removeEventListener('click', step);
@@ -25,12 +27,20 @@ function start(cells) {
             };
             i++;
         })
-        close.addEventListener('click', function () {
-            winner.style.display = 'none';
-            cell.textContent = '';
-        })
     }
 }
+close.addEventListener('click', function () {
+    for (let cell of cells) {
+        winner.style.display = 'none';
+        cell.textContent = '';
+    }
+
+    i = 0
+    this.removeEventListener('click', close)
+    start(cells)
+})
+
+
 
 start(cells);
 
